@@ -18,6 +18,21 @@ export const AppContext = createContext({
     ask: () => {}
 })
 
+const getCourseName = () => {
+	if (document.getElementsByTagName("body")[0].getAttribute("id") == 'page-course-view-topics') {
+		// This is a course page
+		// Get title of course (contained in H1)
+		const moodlefullname = document.getElementsByTagName("h1")[0].textContent as string
+		const re = /^.*[-.*]?- (.*)$/;
+		const found = moodlefullname.match(re);
+		if (found && found.length > 1) {
+			return found[1];
+        } else {
+            return 'moodle course';
+        }
+    }
+}
+
 type Props = {
     children: any
 }
@@ -48,7 +63,8 @@ export const AppProvider = ({ children }: Props) => {
         const body = {
             input: inputValue,
             messages,
-            agent: 'Clippy'
+            agent: 'Clippy',
+            course: getCourseName()
         }
 
         // make the request
@@ -80,16 +96,7 @@ export const AppProvider = ({ children }: Props) => {
         setInputValue('')
         setIsProcessing(false);
     }
-
-    // Add a message to the messages stack.
-    const addMessage = (message: OpenAIMessage) => {
-        // Add the message to the message list
-        setMessages([
-            ...messages,
-            message
-        ])
-    }
-
+    
     const incrementCloseClickCount = () => {
         setCloseClickCount(closeClickCount + 1)
     }

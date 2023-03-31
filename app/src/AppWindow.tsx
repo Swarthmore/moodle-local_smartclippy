@@ -82,7 +82,7 @@ const AppWindow = () => {
 
     incrementCloseClickCount()
 
-    if (closeClickCount < 50) {
+    if (closeClickCount < 25) {
       clippy.stop()
       clippy.speak(randomFromArray([
         'No, no, no, no, no, no, no!',
@@ -96,6 +96,7 @@ const AppWindow = () => {
       ]))
     } else {
       clippy.speak('You sure are persistant. I\'ll leave. But I\'ll be back.')
+      document.getElementById('root')?.style.setProperty('display', 'none');
       // TODO: Exit
     }
 
