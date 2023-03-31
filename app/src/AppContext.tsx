@@ -2,13 +2,15 @@ import { createContext, useContext, useState } from 'react'
 import { truncate } from './utils'
 import { useClippy } from '@react95/clippy'
 
+const APIURL = import.meta.env.VITE_APIURL
+
 type OpenAIMessage = { role: 'user' | 'system' | 'assistant', content: string }
 type AgentName = 'Merlin' | 'Links' | 'Genius' | 'Genie' | 'Rover' | 'Peedy' | 'Bonzi' | 'Clippy' | 'F1' | 'Rocky'
 
 export const Agents: AgentName[] = ['Merlin', 'Links', 'Genius', 'Genie', 'Rover', 'Peedy', 'Bonzi', 'Clippy', 'F1', 'Rocky' ]
 
 export const AppContext = createContext({
-    apiURL: 'http://localhost:7777',
+    apiURL: APIURL,
     messages: [] as OpenAIMessage[],
     isProcessing: false,
     inputValue: '',
@@ -18,27 +20,12 @@ export const AppContext = createContext({
     ask: () => {}
 })
 
-const getCourseName = () => {
-	if (document.getElementsByTagName("body")[0].getAttribute("id") == 'page-course-view-topics') {
-		// This is a course page
-		// Get title of course (contained in H1)
-		const moodlefullname = document.getElementsByTagName("h1")[0].textContent as string
-		const re = /^.*[-.*]?- (.*)$/;
-		const found = moodlefullname.match(re);
-		if (found && found.length > 1) {
-			return found[1];
-        } else {
-            return 'moodle course';
-        }
-    }
-}
-
 type Props = {
     children: any
 }
 export const AppProvider = ({ children }: Props) => {
 
-    const apiURL = 'http://localhost:7777'
+    const apiURL = APIURL 
     const [isProcessing, setIsProcessing] = useState(false)
     const [messages, setMessages] = useState<OpenAIMessage[]>([])
     const [inputValue, setInputValue] = useState('')
@@ -48,6 +35,8 @@ export const AppProvider = ({ children }: Props) => {
 
     // // ask the agent a question
     const ask = async () => {
+
+        console.log(window.document.title)
 
         if (!clippy) {
             console.error('agent is not loaded.')
@@ -64,7 +53,7 @@ export const AppProvider = ({ children }: Props) => {
             input: inputValue,
             messages,
             agent: 'Clippy',
-            course: getCourseName()
+            course: window.document.title || ''
         }
 
         // make the request
