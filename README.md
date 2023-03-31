@@ -1,13 +1,17 @@
-# Clippy-GPT 
+# local_smartclippy
 
 A moodle plugin that brings everyone's favorite mascot from 90's computing to Moodle.
 
-
 ## Requirements
 
-* OpenAI API Key 
-
+- [smartclippy-server](https://github.com/devnoot/smartclippy-server)
 
 ## Installation
 
-`cd` into the `app` folder and run `pnpm build` to build the app. You will need to assign the `apiURL` variables in `app/src/AppContext.tsx` before building. It is defaulted to `http://localhost:7777`
+- Create a `.env` file in `app` with the contents `VITE_APIURL=https://your/api/url`
+
+- `cd` into the `app` folder and run `pnpm build` to build the app. 
+
+- Copy the root folder to `local/smartclippy` to enable Clippy on your course pages.
+
+- NOTE: It will ask you to set an API URL in Moodle settings. Just type in anything as the app doesn't actually look at it.
