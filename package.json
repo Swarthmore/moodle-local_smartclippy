@@ -1,0 +1,24 @@
+{
+  "name": "moodle-local_smartclippy",
+  "description": "Everyone's favorite 90s computing mascot clippy is back with a GPT-powered brain.",
+  "scripts": {
+    "build": "./node_modules/.bin/grunt -v"
+  },
+  "keywords": [
+    "moodle",
+    "clippy",
+    "gpt",
+    "openai",
+    "plugin"
+  ],
+  "author": "Anthony Weed <aweed1@swarthmore.edu>",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^1.4.1",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-contrib-less": "^3.0.0",
+    "grunt-contrib-requirejs": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-load-gruntfile": "^0.0.2"
+  }
+}

@@ -1,0 +1,18 @@
+.stick-to-bottom-right {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.clippy {
+    transform: scale(1.5);
+}
+
+.clippy-balloon {
+    transform: scale(1.5);
+}
+
+#page {
+    width: 120%;
+}
